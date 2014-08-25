@@ -1,3 +1,16 @@
+/**
+ * AngularGM - Google Maps Directives for AngularJS
+ * @version v1.0.0 - 2014-08-25
+ * @link https://github.com/dmcquillan314/angular-maps
+ * @author Dan McQuillan <dmcquillan314@gmail.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+(function() {
+    'use strict';
+
+angular.module('angular-maps', []);
+
+})();
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js
@@ -832,3 +845,157 @@ var RichMarkerPosition = {
   'BOTTOM_RIGHT': 9
 };
 window['RichMarkerPosition'] = RichMarkerPosition;
+
+(function() {
+    'use strict';
+
+angular.module('angular-maps')
+
+    .directive('map', [ function() {
+        return {
+            restrict: 'E',
+            transclude: true,
+            priority: 100,
+            template: '<div>' +
+                        '<div id="" style="width:100%;height:100%;"></div>' +
+                        '<div ng-transclude></div>' +
+                      '</div>',
+            replace: true,
+            controller: 'MapController'
+        };
+    }]);
+
+})();
+(function() {
+    'use strict';
+
+    /**
+     * @ngdoc directive
+     * @name maps.directive:marker
+     *
+     * @description The marker directive interacts with the map directive's controller
+     * to manage a set of markers for that map based on the lifecycle of the marker directive
+     *
+     * @priority 100
+     */
+angular.module('angular-maps')
+
+    .directive('marker', [ function() {
+
+        return {
+            restrict: 'E',
+            require: '^map',
+            priority: 0,
+            link: function(scope, element, attributes, controller) {
+
+                var options = {
+                    position: new google.maps.LatLng(40.80, -74.13),
+                    draggable: true,
+                    flat: true,
+                    anchor: RichMarkerPosition.MIDDLE,
+                    content: 'test'
+                };
+
+                controller.addMarker(options);
+
+                scope.$on('$destroy', function() {
+                    controller.removeMarker(options);
+                });
+            }
+        };
+
+    }]);
+
+})();
+(function() {
+    'use strict';
+
+angular.module('angular-maps')
+
+    .factory('DefaultMarkerFactory', [ function() {
+        var factory = {};
+
+        factory.createMarker = function(options) {
+            return new google.maps.Marker(options);
+        };
+
+        return factory;
+    }])
+
+    .factory('RichMarkerFactory', [ function() {
+        var factory = {};
+
+        factory.createMarker = function(options) {
+            return new RichMarker(options);
+        };
+
+        return factory;
+    }])
+
+    .factory('MarkerFactory', [ 'DefaultMarkerFactory', 'RichMarkerFactory', function(DefaultMarkerFactory, RichMarkerFactory) {
+
+        var factory = {};
+
+        factory.createMarker = function(options) {
+            if(angular.isDefined(options.content)) {
+                return RichMarkerFactory.createMarker(options);
+            }
+
+            return DefaultMarkerFactory.createMarker(options);
+        };
+
+        return factory;
+
+    }]);
+
+})();
+(function() {
+    'use strict';
+
+angular.module('angular-maps')
+
+    .controller('MapController', [ '$scope', '$element', '$attrs', 'MarkerFactory', function($scope, $element, $attrs, MarkerFactory) {
+
+        console.log($attrs);
+
+        var controller = this,
+            _options = {
+                zoom: 7,
+                center: google.maps.LatLng(40, -74)
+            },
+            _markers = [];
+
+        var _map = new google.maps.Map($element[0], _options);
+
+        controller.addMarker = function(marker) {
+            var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+            });
+
+            marker._id = guid;
+            marker.map = _map;
+
+            _markers.push(MarkerFactory.createMarker(marker));
+        };
+
+        controller.removeMarker = function(marker) {
+
+            var markerGuid = marker._id,
+                markerFromCache = null,
+                markerIndexFromCache = null;
+
+            for( var i = 0; i < _markers.length; i++ ) {
+                if( _markers[i]._id === markerGuid ) {
+                    markerFromCache = _markers[i];
+                    markerIndexFromCache = i;
+                    break;
+                }
+            }
+
+            markerFromCache.setMap(null);
+            _markers.splice(markerIndexFromCache);
+        };
+
+    }]);
+})();

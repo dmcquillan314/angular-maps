@@ -28,10 +28,10 @@ angular.module('angular-maps')
                     content: 'test'
                 };
 
-                controller.addMarker(marker);
+                controller.addMarker(options);
 
                 scope.$on('$destroy', function() {
-                    controller.removeMarker(marker);
+                    controller.removeMarker(options);
                 });
             }
         };

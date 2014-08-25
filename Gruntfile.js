@@ -11,7 +11,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-ngdocs');
-    grunt.loadNpmTasks('grunt-contrib-connect');
 
     // Project configuration.
     grunt.initConfig({
@@ -35,7 +34,7 @@ module.exports = function(grunt) {
                 banner: '<%= meta.banner %>'
             },
             dist: {
-                src: ['src/module.js', 'src/directives/*.js', 'src/services/*.js', 'src/controllers/*.js'],
+                src: ['src/main/js/module.js', 'src/main/js/lib/*.js', 'src/main/js/directives/*.js', 'src/main/js/factories/*.js', 'src/main/js/controllers/*.js'],
                 dest: '<%= dirs.dest %>/<%= pkg.name %>.js'
             }
         },
@@ -67,7 +66,9 @@ module.exports = function(grunt) {
                 globals: {
                     exports: true,
                     angular: false,
-                    google: false
+                    google: false,
+                    RichMarkerPosition: true,
+                    RichMarker: true
                 }
             }
         },
@@ -83,6 +84,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['build']);
 
-    grunt.registerTask('build', ['clean', 'jshint', 'karma:unit', 'concat', 'uglify', 'copy:examples', 'ngdocs']);
+    grunt.registerTask('build', ['clean', 'jshint', 'concat', 'uglify', 'ngdocs']);
 
 };
