@@ -1,0 +1,25 @@
+{
+    "name": "angular-maps",
+    "description": "AngularGM - Google Maps Directives for AngularJS",
+    "version": "1.0.0",
+    "homepage": "https://github.com/dmcquillan314/angular-maps",
+    "author": "Dan McQuillan <dmcquillan314@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dmcquillan314/angular-maps.git"
+    },
+    "engines": {
+        "node": "0.8.x"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "~0.4.4",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-jshint": "~0.6.2",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-clean": "~0.5.0",
+        "jshint": "~2.5.0",
+        "grunt-ngdocs": "~0.2.2"
+    }
+}
