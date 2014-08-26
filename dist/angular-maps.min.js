@@ -1,6 +1,6 @@
 /**
  * AngularGM - Google Maps Directives for AngularJS
- * @version v1.0.0 - 2014-08-25
+ * @version v1.0.0 - 2014-08-26
  * @link https://github.com/dmcquillan314/angular-maps
  * @author Dan McQuillan <dmcquillan314@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
