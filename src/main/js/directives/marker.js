@@ -17,8 +17,8 @@ angular.module('angular-maps')
         return {
             restrict: 'E',
             require: '^map',
-            priority: 0,
-            link: function(scope, element, attributes, controller) {
+            priority: 100,
+            link: function(scope, element, attrs, controller) {
 
                 var options = {
                     position: new google.maps.LatLng(40.80, -74.13),

@@ -1,6 +1,6 @@
 /**
  * AngularGM - Google Maps Directives for AngularJS
- * @version v1.0.0 - 2014-08-26
+ * @version v1.0.0 - 2014-08-27
  * @link https://github.com/dmcquillan314/angular-maps
  * @author Dan McQuillan <dmcquillan314@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -856,12 +856,15 @@ angular.module('angular-maps')
             restrict: 'E',
             transclude: true,
             priority: 100,
-            template: '<div>' +
-                        '<div id="" style="width:100%;height:100%;"></div>' +
-                        '<div ng-transclude></div>' +
-                      '</div>',
+            template: '<div class="angular-google-map"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>',
             replace: true,
-            controller: 'MapController'
+            controller: 'MapController',
+            link: function link(scope, element, attrs, controller) {
+                console.log(scope);
+                console.log(element);
+                console.log(attrs);
+                console.log(controller);
+            }
         };
     }]);
 
@@ -885,8 +888,8 @@ angular.module('angular-maps')
         return {
             restrict: 'E',
             require: '^map',
-            priority: 0,
-            link: function(scope, element, attributes, controller) {
+            priority: 100,
+            link: function(scope, element, attrs, controller) {
 
                 var options = {
                     position: new google.maps.LatLng(40.80, -74.13),
@@ -965,7 +968,7 @@ angular.module('angular-maps')
             },
             _markers = [];
 
-        var _map = new google.maps.Map($element[0], _options);
+        var _map = new google.maps.Map($element[0].firstChild, _options);
 
         controller.addMarker = function(marker) {
             var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

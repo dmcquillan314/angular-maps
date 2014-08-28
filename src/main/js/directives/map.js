@@ -8,12 +8,15 @@ angular.module('angular-maps')
             restrict: 'E',
             transclude: true,
             priority: 100,
-            template: '<div>' +
-                        '<div id="" style="width:100%;height:100%;"></div>' +
-                        '<div ng-transclude></div>' +
-                      '</div>',
+            template: '<div class="angular-google-map"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>',
             replace: true,
-            controller: 'MapController'
+            controller: 'MapController',
+            link: function link(scope, element, attrs, controller) {
+                console.log(scope);
+                console.log(element);
+                console.log(attrs);
+                console.log(controller);
+            }
         };
     }]);
 

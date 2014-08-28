@@ -14,7 +14,7 @@ angular.module('angular-maps')
             },
             _markers = [];
 
-        var _map = new google.maps.Map($element[0], _options);
+        var _map = new google.maps.Map($element[0].firstChild, _options);
 
         controller.addMarker = function(marker) {
             var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
