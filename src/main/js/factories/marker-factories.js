@@ -1,6 +1,3 @@
-(function() {
-    'use strict';
-
 angular.module('angular-maps')
 
     .factory('DefaultMarkerFactory', [ function() {
@@ -38,5 +35,3 @@ angular.module('angular-maps')
         return factory;
 
     }]);
-
-})();

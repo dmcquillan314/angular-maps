@@ -1,6 +1,3 @@
-(function() {
-    'use strict';
-
     /**
      * @ngdoc directive
      * @name maps.directive:marker
@@ -37,5 +34,3 @@ angular.module('angular-maps')
         };
 
     }]);
-
-})();

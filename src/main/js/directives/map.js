@@ -1,6 +1,3 @@
-(function() {
-    'use strict';
-
 angular.module('angular-maps')
 
     .directive('map', [ function() {
@@ -19,5 +16,3 @@ angular.module('angular-maps')
             }
         };
     }]);
-
-})();

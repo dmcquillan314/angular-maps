@@ -1,16 +1,12 @@
 /**
  * AngularGM - Google Maps Directives for AngularJS
- * @version v1.0.0 - 2014-08-27
+ * @version v1.0.0 - 2014-08-29
  * @link https://github.com/dmcquillan314/angular-maps
  * @author Dan McQuillan <dmcquillan314@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
-(function() {
-    'use strict';
-
 angular.module('angular-maps', []);
 
-})();
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js
@@ -846,9 +842,6 @@ var RichMarkerPosition = {
 };
 window['RichMarkerPosition'] = RichMarkerPosition;
 
-(function() {
-    'use strict';
-
 angular.module('angular-maps')
 
     .directive('map', [ function() {
@@ -867,10 +860,6 @@ angular.module('angular-maps')
             }
         };
     }]);
-
-})();
-(function() {
-    'use strict';
 
     /**
      * @ngdoc directive
@@ -909,10 +898,6 @@ angular.module('angular-maps')
 
     }]);
 
-})();
-(function() {
-    'use strict';
-
 angular.module('angular-maps')
 
     .factory('DefaultMarkerFactory', [ function() {
@@ -950,10 +935,6 @@ angular.module('angular-maps')
         return factory;
 
     }]);
-
-})();
-(function() {
-    'use strict';
 
 angular.module('angular-maps')
 
@@ -1001,4 +982,3 @@ angular.module('angular-maps')
         };
 
     }]);
-})();

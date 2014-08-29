@@ -1,6 +1,3 @@
-(function() {
-    'use strict';
-
 angular.module('angular-maps')
 
     .controller('MapController', [ '$scope', '$element', '$attrs', 'MarkerFactory', function($scope, $element, $attrs, MarkerFactory) {
@@ -47,4 +44,3 @@ angular.module('angular-maps')
         };
 
     }]);
-})();
