@@ -25,7 +25,7 @@ angular.module('angular-maps')
         var factory = {};
 
         factory.createMarker = function(options) {
-            if(angular.isDefined(options.content)) {
+            if(angular.isDefined(options.content) && options.content !== null) {
                 return RichMarkerFactory.createMarker(options);
             }
 

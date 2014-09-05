@@ -1,0 +1,43 @@
+<h1><code ng:non-bindable="">map</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">maps</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="maps-directive-page maps-directive-map-page"><p>A directive for embedding google maps into an app</p>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as attribute<pre class="prettyprint linenums">&lt;ANY map
+     [center]="{expression}"
+     pan="{string|boolean}"
+     control="{object}"
+     [zoom]="{expression}"
+     [draggable]="{string|boolean}"
+     [options]="{expression|object}"
+     [events]="{expression|object}"&gt;
+   ...
+&lt;/ANY&gt;</pre>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>[center]</td><td><a href="" class="label type-hint type-hint-expression">expression</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>Expression to evaluate as an object representing the map center. May be in the form of an object containing latitude and longitude properties.</p>
+</div></td></tr><tr><td>pan</td><td><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>This attribute is a flag indicate how the map&#39;s centering should behave. This tells the map to use map.panTo instead of map.setCenter. (Animate to center via pan or not.)</p>
+<p>Note: Evaluated on the attribute only.  This is not watched on the scope</p>
+</div> <p><em>(default: false)</em></p></td></tr><tr><td>control</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>If this attribute is passed it will bind a few methods to the passed object</p>
+<dl>
+    <dt>getMap()</dt>
+    <dd>returns a direct reference to the map of the directive</dd>
+</dl>
+
+<p>More to possibly come....</p>
+</div> <p><em>(default: undefined)</em></p></td></tr><tr><td>[zoom]</td><td><a href="" class="label type-hint type-hint-expression">expression</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>expression to evaluate as the maps zoom level (1-20)</p>
+</div></td></tr><tr><td>[draggable]</td><td><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-boolean">boolean</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>marks the map as draggable</p>
+</div></td></tr><tr><td>[options]</td><td><a href="" class="label type-hint type-hint-expression">expression</a><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>options to pass to the initialization of the map to be copied to the initial set of map options</p>
+</div></td></tr><tr><td>[events]</td><td><a href="" class="label type-hint type-hint-expression">expression</a><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-map-page"><p>Custom events to apply to the map. This is an associative array, where keys are event names and values are handler functions.</p>
+<p>The handler function takes three parameters:</p>
+<dl>
+     <dt>maps</dt>
+     <dd>the GoogleMap object</dd>
+     <dt>eventName</dt>
+     <dd>the name of the event</dd>
+     <dt>arguments</dt>
+     <dd>the arguments provided by Google Maps for this event type. See the <a href="https://developers.google.com/maps/documentation/javascript/reference#Map" target="_blank">Google Map Event docs</a></dd>
+</dl></div></td></tr></tbody></table></div>
+</div>

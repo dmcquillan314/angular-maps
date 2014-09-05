@@ -27,7 +27,7 @@
      */
 angular.module('angular-maps')
 
-    .directive('marker', [ function() {
+    .directive('marker', [ '$parse', function($parse) {
 
         return {
             restrict: 'E',
@@ -35,18 +35,38 @@ angular.module('angular-maps')
             priority: 100,
             link: function(scope, element, attrs, controller) {
 
-                var options = {
-                    position: new google.maps.LatLng(40.80, -74.13),
-                    draggable: true,
-                    flat: true,
-                    anchor: RichMarkerPosition.MIDDLE,
-                    content: 'test'
+                var defaults = {
+                    clickable: true,
+                    crossOnDrag: true,
+                    draggable: false,
+                    opacity: 1.0,
+                    visible: true
                 };
+
+                var events = $parse(attrs.events)(scope),
+                    options = $parse(attrs.options)(scope),
+                    position = $parse(attrs.position)(scope),
+                    content = attrs.content ? $parse(attrs.content)(scope) : null;
+
+                options.position = new google.maps.LatLng(position.latitude, position.longitude);
+                options.content = content;
 
                 controller.addMarker(options);
 
                 scope.$on('$destroy', function() {
                     controller.removeMarker(options);
+                });
+
+                scope.$watch( attrs.events, function(events) {
+                    console.log(events);
+                });
+
+                scope.$watch( attrs.position, function(position) {
+                    options.position = new google.maps.LatLng(position.latitude, position.longitude);
+                });
+
+                scope.$watch( attrs.content, function(content) {
+                    options.content = content;
                 });
             }
         };
