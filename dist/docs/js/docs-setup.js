@@ -19,7 +19,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "maps",
       "shortDescription": "The marker directive is used to add a google.maps.Marker or RichMarker(html marker) object to an existing map.  If both the icon and content are specified it will give the",
-      "keywords": "_blank add api apply array associative attribute bind center content current custom direct directive evaluate evaluated event events existing expression form functions google handler href https icon image latitude longitude map maps marker markeroptions methods names note object options parsed passed point priority properties reference representing richmarker scope target values watched"
+      "keywords": "_blank add api apply arguments array associative attribute bind center content current custom definitions direct directive docs evaluate evaluated event events existing expression form function functions google handler href https icon image latitude longitude map maps marker markeroptions methods names note object options parsed passed point priority properties provided reference representing richmarker scope target type values watched"
     }
   ],
   "apis": {

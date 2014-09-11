@@ -19,6 +19,17 @@
      * More to possibly come....
      *
      * @param {expression|object} [events] Custom events to apply to the map. This is an associative array, where keys are event names and values are handler functions.
+     *
+     * The function definitions should have the following arguments:
+     * <dl>
+     *      <dt>marker</dt>
+     *      <dd>the Marker object</dd>
+     *      <dt>eventName</dt>
+     *      <dd>the name of the event</dd>
+     *      <dt>arguments</dt>
+     *      <dd>the arguments provided by Google Maps for this event type. See the <a href="https://developers.google.com/maps/documentation/javascript/reference#Map" target="_blank">Google Map Event docs</a></dd>
+     * </dl>
+     *
      * @param {expression|object} [options] Custom map representing the options to be passed to marker options.  See <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions" target="_blank">MarkerOptions</a>
      * @param {string|htmlString} [content=undefined] The content to be placed in the marker.  Will be parsed at the current point in the scope. (required if icon not specified)
      * @param {string|url} [icon=undefined] The image to be used as an icon (required if content not specified)
@@ -35,7 +46,7 @@ angular.module('angular-maps')
             priority: 100,
             link: function(scope, element, attrs, controller) {
 
-                var defaults = {
+                var _defaults = {
                     clickable: true,
                     crossOnDrag: true,
                     draggable: false,
@@ -43,30 +54,56 @@ angular.module('angular-maps')
                     visible: true
                 };
 
-                var events = $parse(attrs.events)(scope),
-                    options = $parse(attrs.options)(scope),
-                    position = $parse(attrs.position)(scope),
-                    content = attrs.content ? $parse(attrs.content)(scope) : null;
+                var _events = $parse(attrs.events)(scope),
+                    _options = $parse(attrs.options)(scope),
+                    _position = $parse(attrs.position)(scope),
+                    _content = attrs.content ? $parse(attrs.content)(scope) : null,
+                    _control = attrs.control ? $parse(attrs.control)(scope) : {},
+                    _markerObject = null;
 
-                options.position = new google.maps.LatLng(position.latitude, position.longitude);
-                options.content = content;
+                var unbindEvents = function() {
+                    google.maps.event.clearInstanceListeners(_markerObject);
+                };
 
-                controller.addMarker(options);
+                var updateEvents = function() {
+                    angular.forEach(_events, function(handlerFn, eventName) {
+                        google.maps.event.addListener(eventName, function(event) {
+                            handlerFn(_markerObject, eventName, event);
+                        });
+                    });
+                };
+
+                angular.extend(_options, _defaults);
+
+                _options.position = new google.maps.LatLng(_position.latitude, _position.longitude);
+                _options.content = _content;
+
+                _markerObject = controller.addMarker(_options);
+
+                _control.getMarker = function() {
+                    return _markerObject;
+                };
 
                 scope.$on('$destroy', function() {
-                    controller.removeMarker(options);
+                    controller.removeMarker(_options);
                 });
 
                 scope.$watch( attrs.events, function(events) {
-                    console.log(events);
+                    unbindEvents();
+                    _events = events;
+                    updateEvents();
                 });
 
                 scope.$watch( attrs.position, function(position) {
-                    options.position = new google.maps.LatLng(position.latitude, position.longitude);
+                    controller.removeMarker(_options);
+                    _options.position = new google.maps.LatLng(position.latitude, position.longitude);
+                    _markerObject = controller.addMarker(_options);
                 });
 
                 scope.$watch( attrs.content, function(content) {
-                    options.content = content;
+                    controller.removeMarker(_options);
+                    _options.content = content;
+                    _markerObject = controller.addMarker(_options);
                 });
             }
         };

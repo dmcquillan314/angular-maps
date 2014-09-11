@@ -31,7 +31,15 @@ content priority</p>
 
 <p>More to possibly come....</p>
 </div> <p><em>(default: undefined)</em></p></td></tr><tr><td>[events]</td><td><a href="" class="label type-hint type-hint-expression">expression</a><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-marker-page"><p>Custom events to apply to the map. This is an associative array, where keys are event names and values are handler functions.</p>
-</div></td></tr><tr><td>[options]</td><td><a href="" class="label type-hint type-hint-expression">expression</a><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-marker-page"><p>Custom map representing the options to be passed to marker options.  See <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions" target="_blank">MarkerOptions</a></p>
+<p>The function definitions should have the following arguments:</p>
+<dl>
+     <dt>marker</dt>
+     <dd>the Marker object</dd>
+     <dt>eventName</dt>
+     <dd>the name of the event</dd>
+     <dt>arguments</dt>
+     <dd>the arguments provided by Google Maps for this event type. See the <a href="https://developers.google.com/maps/documentation/javascript/reference#Map" target="_blank">Google Map Event docs</a></dd>
+</dl></div></td></tr><tr><td>[options]</td><td><a href="" class="label type-hint type-hint-expression">expression</a><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="maps-directive-page maps-directive-marker-page"><p>Custom map representing the options to be passed to marker options.  See <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions" target="_blank">MarkerOptions</a></p>
 </div></td></tr><tr><td>content</td><td><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-htmlstring">htmlString</a></td><td><div class="maps-directive-page maps-directive-marker-page"><p>The content to be placed in the marker.  Will be parsed at the current point in the scope. (required if icon not specified)</p>
 </div> <p><em>(default: undefined)</em></p></td></tr><tr><td>icon</td><td><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-url">url</a></td><td><div class="maps-directive-page maps-directive-marker-page"><p>The image to be used as an icon (required if content not specified)</p>
 </div> <p><em>(default: undefined)</em></p></td></tr></tbody></table></div>

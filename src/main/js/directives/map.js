@@ -23,15 +23,15 @@ angular.module('angular-maps')
  *
  * More to possibly come....
  *
- * @param {expression} [zoom] expression to evaluate as the maps zoom level (1-20)
+ * @param {expression|number} [zoom] expression to evaluate as the maps zoom level (1-20)
  *
- * @param {string|boolean} [draggable] marks the map as draggable
- * @param {expression|object} [options] options to pass to the initialization of the map to be copied to the initial set of map options
- * @param {expression|object} [events] Custom events to apply to the map. This is an associative array, where keys are event names and values are handler functions.
+ * @param {string|boolean} [draggable=true] marks the map as draggable
+ * @param {expression|object} [options={}] options to pass to the initialization of the map to be copied to the initial set of map options
+ * @param {expression|object} [events={}] Custom events to apply to the map. This is an associative array, where keys are event names and values are handler functions.
  *
  * The handler function takes three parameters:
  * <dl>
- *      <dt>maps</dt>
+ *      <dt>map</dt>
  *      <dd>the GoogleMap object</dd>
  *      <dt>eventName</dt>
  *      <dd>the name of the event</dd>
@@ -46,13 +46,6 @@ angular.module('angular-maps')
             priority: 100,
             template: '<div class="angular-google-map"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>',
             replace: true,
-            controller: 'MapController',
-            link: function link(scope, element, attrs, controller) {
-
-
-
-
-
-            }
+            controller: 'MapController'
         };
     }]);
