@@ -33,8 +33,8 @@ angular.module('angular-maps')
         var _draw = function() {
                 var bounds = new google.maps.LatLngBounds();
 
-                for( var markerIndex in _markers ) {
-                    var marker = _markers[markerIndex];
+                for(var i = 0; i < _markers.length; i++) {
+                    var marker = _markers[i];
                     bounds.extend(marker.position);
                 }
 
@@ -57,7 +57,7 @@ angular.module('angular-maps')
                 }
             };
 
-        controller.addMarker = function(marker) {
+        controller.addMarker = function(marker, redraw) {
             var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
                 return v.toString(16);
@@ -69,12 +69,14 @@ angular.module('angular-maps')
             var markerObject = MarkerFactory.createMarker(marker);
             _markers.push(markerObject);
 
-            _draw();
+            if(redraw) {
+                _draw();
+            }
 
             return markerObject;
         };
 
-        controller.removeMarker = function(marker) {
+        controller.removeMarker = function(marker, redraw) {
 
             var markerGuid = marker._id,
                 markerFromCache = null,
@@ -90,7 +92,10 @@ angular.module('angular-maps')
 
             markerFromCache.setMap(null);
             _markers.splice(markerIndexFromCache, 1);
-            _draw();
+
+            if(redraw) {
+                _draw();
+            }
         };
 
         _updateCenter();

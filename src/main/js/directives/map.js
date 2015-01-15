@@ -41,7 +41,7 @@ angular.module('angular-maps')
  */
     .directive('map', [ '$parse', function($parse) {
         return {
-            restrict: 'E',
+            restrict: 'AE',
             transclude: true,
             priority: 100,
             template: '<div class="angular-google-map"><div class="angular-google-map-container"></div><div ng-transclude style="display: none"></div></div>',
