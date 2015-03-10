@@ -39,7 +39,7 @@ angular.module('angular-maps')
  *      <dd>the arguments provided by Google Maps for this event type. See the <a href="https://developers.google.com/maps/documentation/javascript/reference#Map" target="_blank">Google Map Event docs</a></dd>
  * </dl>
  */
-    .directive('map', [ '$parse', function($parse) {
+    .directive('google-map', [ '$parse', function($parse) {
         return {
             restrict: 'AE',
             transclude: true,
